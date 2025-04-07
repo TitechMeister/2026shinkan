@@ -1,16 +1,15 @@
-[前回](https://github.com/TitechMeister/Device-ATmega88_Board/tree/main/docs/day0/)の続きです。今回はLEDをチカチカさせます。
+[前回](https://github.com/TitechMeister/2026shinkan/blob/main/docsnew/day0.5/day0.5.md)の続きです。今回はLEDをチカチカさせます。
 
 ---
 
 # 目次
 
-* [はじめに(ハードウェア編)](https://github.com/TitechMeister/Device-ATmega88_Board/tree/main/docs/day0/)
-* [はじめに(ソフトウェア編)](https://github.com/TitechMeister/Device-ATmega88_Board/tree/main/docs/day0.5/)
-* [第1回 Lチカ](https://github.com/TitechMeister/Device-ATmega88_Board/tree/main/docs/day1/)
-* [第2回 7セグメントLED](https://github.com/TitechMeister/Device-ATmega88_Board/tree/main/docs/day2/)
-* [第3回 ダイナミック点灯](https://github.com/TitechMeister/Device-ATmega88_Board/tree/main/docs/day3/)
-* [第4回 タイマ割り込み](https://github.com/TitechMeister/Device-ATmega88_Board/tree/main/docs/day4/)
-* [第5回 サーミスタとAD変換](https://github.com/TitechMeister/Device-ATmega88_Board/tree/main/docs/day5/)
+* [はじめに(ハードウェア編)](https://github.com/TitechMeister/2026shinkan/blob/main/docsnew/day0/day0.md)
+* [はじめに(ソフトウェア編)](https://github.com/TitechMeister/2026shinkan/blob/main/docsnew/day0.5/day0.5.md)
+* [第1回 Lチカ](https://github.com/TitechMeister/2026shinkan/blob/main/docsnew/day1/day1.md)
+* [第2回 7セグメントLED](https://github.com/TitechMeister/2026shinkan/blob/main/docsnew/day2/day2.md)
+* [第3回 ダイナミック点灯](https://github.com/TitechMeister/2026shinkan/blob/main/docsnew/day3/day3.md)
+
 
 ---
 
@@ -104,3 +103,6 @@ avrdude -c usbtiny -p m88 -U flash:w:{.hexのアドレスに変える}
 
 Winavrを用いたマイコンへのプログラムの書き込みについての説明は以下
 のページを読んで見てください。
+
+---
+[次回:DAY2_7セグLED](https://github.com/TitechMeister/2026shinkan/blob/main/docsnew/day2/day2.md)
