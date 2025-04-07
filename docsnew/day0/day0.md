@@ -20,7 +20,7 @@
 
 ## 2. 回路の準備
 
-Meister新歓2023で使用する回路の情報はGithubで管理されています。詳細は[https://github.com/TitechMeister/Device-ATmega88_Board](https://github.com/TitechMeister/Device-ATmega88_Board)で確認できます。
+Meister新歓2025で使用する回路の情報はGithubで管理されています。詳細は[https://github.com/TitechMeister/2026sinkan](https://github.com/TitechMeister/2026shinkan/tree/main)で確認できます。
 
 受け取る際には、事前に公式TwitteかDiscord、公式LINEで連絡をして頂けると幸いです。
 
@@ -31,7 +31,7 @@ Meister新歓2023で使用する回路の情報はGithubで管理されています。詳細は[https://gi
 |ATmega88|1|<img height="128" src="https://akizukidenshi.com/img/goods/L/103655.jpg"></img>|
 |1kΩ抵抗|14|<img width="128" src="https://akizukidenshi.com/img/goods/L/126479.jpg"></img>|
 |2SC1815|4|<img width="128" src="https://akizukidenshi.com/img/goods/L/126144.jpg"></img>|
-|1x3ピンヘッダ|2|<img src="https://akizukidenshi.com/img/goods/L/126144.jpg" height="128"></img>|
+|1x3ピンヘッダ|2|<img src="https://akizukidenshi.com/img/goods/L/106192.jpg" height="128"></img>|
 |1x6ピンヘッダ|2|<img width="128"  src="https://akizukidenshi.com/img/goods/L/105336.jpg"></img>|
 |USB typeA メス|1|<img height="128" src="https://akizukidenshi.com/img/goods/L/100160.jpg"></img>|
 |7セグ|1|<img src="https://akizukidenshi.com/img/goods/L/103673.jpg" height="128"></img>|
