@@ -115,6 +115,6 @@ for(int i=0:i<9:i++){
 
 ここまでお疲れ様でした！
 これにて電操作業体験は終了です！
-Meisterではもひこんなど新勧イベントが他にもあるのでぜひ参加してみてください！
+Meisterでは[もひこんなど新勧イベント](https://titechmeister.github.io/welcome/event)が他にもあるのでぜひ参加してみてください！
 
 
