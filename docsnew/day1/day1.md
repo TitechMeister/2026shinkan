@@ -98,7 +98,7 @@ step3.コマンドプロンプトからwinavrを起動＆.hexファイルをマイコンに書き込む
 
 .hexのアドレスをコピペして以下の呪文を完成させよう！
 ```
-avrdude -c usbtiny -p m88 -U flash:w:{.hexのアドレスに変える}
+avrdude -c arduino -p m88 -P <ポート> -b 19200 -U flash:w:{.hexファイルのアドレスに書き換える}:i
 
 ```
 以下の呪文をコマンドプロンプトに打ち込もう！
