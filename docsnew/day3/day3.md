@@ -96,16 +96,51 @@ DIGIT(n);
 
 ## 最終課題　0~9999までカウントアップするタイマーを作ろう！
 
-【ヒント】
-for文を2重3重に使うと？
 
-```cpp
-for(int i=0:i<9:i++){
-    for(int j=0:j<9:j++){
 
+<details>
+  <summary>プログラム例</summary>
+  <pre><code>
+#include<avr/io.h>
+#include<util/delay.h>
+
+int led[10]={0b00111111,0b00000110,0b01011011,0b01001111,0b01100110,0b01101101,0b01111100,0b00100111,0b01111111,0b01101111};
+
+//DIGIT(i)を準備する
+int digit[4]={0b00000001,0b00000010,0b00000100,0b00001000};
+
+int main(void){
+    DDRD=0b11111111;
+    DDRB=0b00001111;
+
+    //LED(i)を準備する
+
+    while(1){
+        for(int i=0;i<10000;i++){
+            int j = i/1000;
+            int k = (i-j*1000)/100;
+            int l = (i-j*1000-k*100)/10;
+            int m = (i-j*1000-k*100-l*10);
+            for(int n =0;n<20;n++){
+                PORTD=led[j];
+                PORTB=digit[0];
+                _delay_ms(1);
+                PORTD=led[k];
+                PORTB=digit[1];
+                _delay_ms(1);
+                PORTD=led[l];
+                PORTB=digit[2];
+                _delay_ms(1);
+                PORTD=led[m];
+                PORTB=digit[3];
+                _delay_ms(1);
+            }
+        }
     }
 }
-```
+  </code></pre>
+</details>
+
 
 ここまでお疲れ様でした！
 これにて電操作業体験は終了です！

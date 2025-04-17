@@ -25,15 +25,15 @@
 #include<avr/io.h>
 #include<util/delay.h>
 
-int main(void){
     DDRD=0b11111111;
     DDRB=0b00001111;
     PORTB=0b00001111;
 
     int led[10]=(0b00111111,0b00000110,0b01011011,0100111111,0b01100110,0b00101101,0b01111100,0b00100111,0b01111111,0b01101111)
     #define LED(i) PORTD=led[i]
-    
 
+int main(void){
+    
     //«‚±‚Ì‰º‚É‘‚«‚Ş
 }
 ```
