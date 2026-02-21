@@ -1,0 +1,3 @@
+[submodule "Meister-KicadLibrary"]
+	path = Meister-KicadLibrary
+	url = https://github.com/TitechMeister/Meister-KicadLibrary.git
