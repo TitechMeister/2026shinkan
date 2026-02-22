@@ -1,0 +1,117 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP 2SD1781KT146R
+D ROHM 2SD1781KT146R NPN Bipolar Transistor, 0.8 A, 32 V, 3-Pin SC-59
+F http://uk.rs-online.com/web/p/products/8268440P
+$ENDCMP
+#
+$CMP 3362P-1-202LF
+D 3362P top adj cermet trimmer 2K 6mm Bourns 3362P Series Through Hole Cermet Trimmer Resistor with Pin Terminations, 2k +/-10% 0.5W +/-100ppm/C Top Adjust
+F http://uk.rs-online.com/web/p/products/5220934P
+$ENDCMP
+#
+$CMP 7810-8P8C
+D Modular Jack, side entry, shielded
+F http://akizukidenshi.com/download/ds/neltron/7810-XPXC_20180312.pdf
+$ENDCMP
+#
+$CMP 953-1C-5DG-1
+D 953G Series Relay
+F http://akizukidenshi.com/download/ds/hsinda/953G%20Relay.pdf
+$ENDCMP
+#
+$CMP ACM1602N1-FLW-FBW
+D Character Module
+F http://akizukidenshi.com/download/ds/xiamen/ACM1602NI-FLW-FBW-M01_20190219.pdf
+$ENDCMP
+#
+$CMP ALQ105
+D SPDT PCB Mount Non-Latching Relay 10 A, 5V dc
+F http://uk.rs-online.com/web/p/products/1347924
+$ENDCMP
+#
+$CMP ICM-20789
+D IMUs - Inertial Measurement Units World's First 7-Axis Integrated Solution (Gyro + Accel + Pressure) MEMS Motion Tracking Device
+F https://3cfeqx1hf82y3xcoull08ihx-wpengine.netdna-ssl.com/wp-content/uploads/2017/10/DS-000169-ICM-20789-TYP-v1.4.pdf
+$ENDCMP
+#
+$CMP INA226-module
+F https://strawberry-linux.com/pub/ina226-manual.pdf
+$ENDCMP
+#
+$CMP ISL91107IRTNZ-T7A
+D Integrated FET Regulators High Efficiency Buck-Boost Regulator with 4.1A Switches
+F http://uk.rs-online.com/web/p/products/1230989P
+$ENDCMP
+#
+$CMP ISL9110IRT7Z
+D Integrated FET Regulators 1.2A High Efficiency Buck-Boost Regulators 5V OUT
+F https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-SFU4/DSASF4000-1643.pdf
+$ENDCMP
+#
+$CMP ISL9110IRTNZ
+D Integrated FET Regulators 1.2A High Efficiency Buck-Boost Regulators 3.3V OUT
+F https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-SFU4/DSASF4000-1643.pdf
+$ENDCMP
+#
+$CMP LTC485IS8#PBF
+D Linear Technology LTC485IS8#PBF, Line Transceiver, RS-485, 5 V, 8-Pin SOIC
+F http://uk.rs-online.com/web/p/products/7869988P
+$ENDCMP
+#
+$CMP MB1010-000
+D ULTRASONIC SENSOR LV-MAXSONAR-EZ
+F https://www.maxbotix.com/documents/LV-MaxSonar-EZ_Datasheet.pdf
+$ENDCMP
+#
+$CMP MCP9600-I_MX
+D MICROCHIP - MCP9600-I/MX - THERMOCOUPLE EMF TO TEMP CONV, VQFN-20
+F http://uk.rs-online.com/web/p/products/9053040P
+$ENDCMP
+#
+$CMP MPL3115A2
+D MPL3115A2, Absolute Pressure Sensor, 110kPa 0.9  1 V Output, 8-Pin LGA
+F http://uk.rs-online.com/web/p/products/7500841
+$ENDCMP
+#
+$CMP NJM12877F18-TE1
+D LDO Voltage Regulators LDO ADJ High Ripple 1.8V Vo 1% 200mA
+F https://componentsearchengine.com/Datasheets/1/NJM12877F18-TE1.pdf
+$ENDCMP
+#
+$CMP NJM2863F33
+D Ultra Low Noise Low Dropout Voltage Regulator, SOT-23-5
+F http://www.njr.com/semicon/PDF/NJM2863_NJM2864_E.pdf
+$ENDCMP
+#
+$CMP NSI45030AT1G
+D Constant Current Regulator
+F http://uk.rs-online.com/web/p/products/7377990P
+$ENDCMP
+#
+$CMP RK10J11E0034
+D Potentiometers Single Unit 10mm,1B insertion (2mm) Low-profile, dip and reflow solderable
+F https://www.mouser.com/datasheet/2/15/RKJ1-1370680.pdf
+$ENDCMP
+#
+$CMP S2B-PH-SM4-TB(LF)(SN)
+D PH SMT side entry shroud header 2 way JST PH Series, 2mm Pitch 2 Way 1 Row Right Angle PCB Header, Solder Termination, 2A
+F http://uk.rs-online.com/web/p/products/6881353P
+$ENDCMP
+#
+$CMP TD62083AFG,N,EL
+D Gate Drivers
+F http://toshiba.semicon-storage.com/info/docget.jsp?did=1577&prodName=TD62083AFG
+$ENDCMP
+#
+$CMP UTRS485G-S08-R
+D FAIL-SAFE, 4.5MBPS, RS-485 / RS-422 TRANSCEIVERS WITH +/-12KV ESD-PROTECTED
+F http://www.unisonic.com.tw/datasheet/UTRS485.pdf
+$ENDCMP
+#
+$CMP NJM2866F33-TE1
+D LDO Voltage Regulators Low Dropout Volt Regulator
+F 
+$ENDCMP
+#
+#End Doc Library
