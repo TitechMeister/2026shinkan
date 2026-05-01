@@ -16,10 +16,10 @@ void loop() {
     
     // 指が離されるまで、ここで処理を止めて待機する（連打・長押し判定を防ぐ）
     while (digitalRead(button) == LOW) {
-      delay(10);
+        delay(10);
     }
-  }
-  Serial.print("ボタンが");
-  Serial.print(count);
-  Serial.println("回押されました");
+    Serial.print("ボタンが");
+    Serial.print(count);
+    Serial.println("回押されました");
+    }
 }
