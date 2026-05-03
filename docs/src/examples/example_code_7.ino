@@ -16,7 +16,7 @@ void loop(){
 
             SonicData[1] = Serial1.read();
         }
-        while(!Serial1.available());
+        while(!Serial1.available());//上一桁以外のデータを破棄
         SonicData[2] = Serial1.read();
         while(!Serial1.available());
         SonicData[3] = Serial1.read();
