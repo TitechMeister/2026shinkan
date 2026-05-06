@@ -1,4 +1,4 @@
-#define D9 button
+#define button D9
 uint8_t led[3] = {D0,D1,D2};
 
 void setup(){
@@ -13,9 +13,13 @@ void loop(){
         for(uint8_t i = 0; i < 3; i++){
         digitalWrite(led[i],HIGH);
         delay(500);
+        digitalWrite(led[i],LOW);
+        delay(500);
+        
     }
     }else{
         for(uint8_t i = 0; i < 3; i++){
         digitalWrite(led[i],LOW);
+    }
     }
 }

@@ -388,7 +388,7 @@ void loop() {
 ### 04-3. 全体の動作を確認する
 
 ```cpp
-#define D9 button
+#define button D9
 uint8_t led[3] = {D0, D1, D2};
 
 void setup() {
@@ -404,6 +404,8 @@ void loop() {
         for(uint8_t i = 0; i < 3; i++) {
             digitalWrite(led[i], HIGH);
             delay(500); // 0.5秒おきに点灯
+            digitalWrite(led[i],LOW);
+            delay(500);
         }
     } else {
         // ボタンが押下されていない時は、すべてのLEDを消灯する
@@ -415,7 +417,7 @@ void loop() {
 ```
 
 実行フロー：
-1. `#define` により `D9` ピンを `button` として定義する
+1. `#define` により `button` を `D9` ピンとして定義する
 2. LED出力用ピンは配列変数 `led` に格納する
 3. `setup()` の中で LED を出力（OUTPUT）、ボタンピンを入力（INPUT）に設定する
 4. `loop()` の分岐（`if` 文）内において、`digitalRead()` でボタンの状態を読み取る
@@ -988,9 +990,73 @@ if(Wire.available() == 6){
 
 サンプルコード `example_code_9.ino` では、一つの測定値を出すために `for` 文を使って10回分のセンサデータを取得し、有効なデータが得られた回数（`validSamples`）で温度・湿度の合計値（`tempSum` や `humSum`）を割って平均値を出しています。
 
+まずは全体の構造を見てみましょう。データの取得と平均値の計算は、以下のような枠組みで行われています。
+
 ```cpp
-float avgTemp = tempSum / validSamples; // 合計を回数で割って平均を計算
+void loop() {
+    // 【ステップ1】合計を入れるための箱（変数）を用意し、0.0で空にしておく
+    float tempSum = 0.0;
+    float humSum = 0.0;
+    uint8_t validSamples = 0; // 成功した回数を数える変数
+
+    // 【ステップ2】for文を使って、測定と合算を10回繰り返す
+    for (uint8_t i = 0; i < 10; i++) {
+        
+        // --- センサに測定を指示してデータを読み取る処理（後述） ---
+        
+    }
+
+    // 【ステップ3】ループが終わったら、合計(Sum)を回数(validSamples)で割って平均を出す
+    float avgTemp = tempSum / validSamples; 
+    float avgHum = humSum / validSamples;
+
+    // ...平均値をシリアルモニタに表示する処理...
+}
 ```
+
+この枠組みの中で、実際にセンサからデータを読み取り、合計値の箱に足していく（ステップ2の中身）のが次の部分です。
+
+```cpp
+// センサから6バイトのデータが正しく受信できたか確認
+if (Wire.available() == 6) {
+    uint8_t rxData[6];
+    for (uint8_t j = 0; j < 6; j++) {
+        rxData[j] = Wire.read(); // 1バイトずつ配列に保存
+    }
+
+    // Lesson 08で学んだ「ビットずらし」を使って、16ビットのデータに復元
+    uint16_t tempRaw = (rxData[0] << 8) | rxData[1];
+    uint16_t humRaw = (rxData[3] << 8) | rxData[4];
+
+    // データシートの計算式を使って実際の温度と湿度に変換
+    float temperature = -45.0 + (175.0 * (float)tempRaw / 65535.0);
+    float humidity = 100.0 * (float)humRaw / 65535.0;
+
+    // 【重要】ここで、計算して出たばかりの「今回の温度・湿度」を合計の箱に足し込む
+    tempSum += temperature; // tempSum = tempSum + temperature と同じ意味
+    humSum += humidity;
+    
+    // 成功した回数を1増やす
+    validSamples++;
+}
+```
+
+この処理の流れを、プログラムの動きに合わせて順番に見ると次のようになります。
+
+1. **(`loop` の開始)** `loop()` の先頭で `tempSum` と `humSum` を `0.0` に初期化し、合計値をためる箱を空にします。
+2. **(10回ループの開始)** `for (uint8_t i = 0; i < 10; i++)` で10回測定を繰り返すループに入ります。
+3. `Wire.beginTransmission()` から `Wire.endTransmission()` までで、センサに測定開始コマンド（0x24 0x00）を送ります。
+4. `delay(20)` で、センサが測定を終えるまで少し待機します。
+5. `Wire.requestFrom()` で6バイトのデータを要求し、`Wire.available() == 6` ならデータが正常に全部届いたと判断します。
+6. `Wire.read()` を使って受信したデータを `rxData[]` という配列の箱に順番に保存します。
+7. `rxData[0] << 8` のようにビットをずらして組み合わせることで、バラバラだったデータを元の16ビットの形（`tempRaw`, `humRaw`）に復元します。
+8. データシートの公式（`-45.0 + ...`）を使って、`tempRaw` を人間が読める温度（℃）、`humRaw` を湿度（%）に変換します。
+9. **(足し込み)** 変換した「1回分」の値を、最初に用意した `tempSum` と `humSum` という合計用の箱に足し込み（`+=` を使用）、成功した回数 `validSamples` を1増やします。
+10. ここまでの手順（3〜9）を10回繰り返します。箱の中には10回分の温度と湿度が足されて大きな数値になっています。
+11. **(平均の計算)** 10回のループが終わったら、`tempSum / validSamples` のように、足し合わされた合計値を成功した回数で割って平均値を求めます。
+12. **(結果の表示)** 最後に `Serial.print()` を使って、求めた平均値をパソコンに表示します。
+
+この一連の流れを見ると、移動平均の本体は「箱を空にする」→「何回も測って箱に足し込む」→「最後に回数で割る」という非常にシンプルな手順でできていることがわかります。これにより、1回の通信エラーや突発的なノイズに強くなり、より正確で安定した結果を得ることができるのです。
 
 ### 09-2. 変数の宣言場所（スコープ）と初期化の理由
 

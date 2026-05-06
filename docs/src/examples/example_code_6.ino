@@ -1,5 +1,5 @@
-#define D3 analog_Pin
-#define D9 PWM_Pin
+#define analog_Pin D3
+#define PWM_Pin D9
 
 void setup(){
     pinMode(analogPin,INPUT);
