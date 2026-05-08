@@ -5,6 +5,28 @@
 
 ---
 
+## 目次
+
+- [Lesson 01: LEDを点灯させる](#lesson-01-ledを点灯させる)
+- [Lesson 02: `#define` と `delay()` を使う](#lesson-02-define-と-delay-を使う)
+- [Lesson 03: `const`・配列・変数の型を使う](#lesson-03-const配列変数の型を使う)
+- [Lesson 04: `digitalRead()` による入力の読み取り](#lesson-04-digitalread-による入力の読み取り)
+- [Lesson 05: シリアル通信（Serial）でPCとやり取りする](#lesson-05-シリアル通信serialでpcとやり取りする)
+- [Lesson 06: 超音波センサで距離を測る](#lesson-06-超音波センサで距離を測る)
+- [Lesson 07: シリアル通信（UART）によるデータ受信と文字コード](#lesson-07-シリアル通信uartによるデータ受信と文字コード)
+- [Lesson 08: I2C通信とビット演算（SHT31センサ）](#lesson-08-i2c通信とビット演算sht31センサ)
+- [Lesson 09: 移動平均を用いたデータの安定化](#lesson-09-移動平均を用いたデータの安定化)
+- [Lesson 10: ライブラリの利用とオブジェクトの操作](#lesson-10-ライブラリの利用とオブジェクトの操作)
+- [Lesson 11: 関数の作成と利用（引数と返り値）](#lesson-11-関数の作成と利用引数と返り値)
+- [Lesson 12: 条件分岐（switch文）と割り込み処理](#lesson-12-条件分岐switch文と割り込み処理)
+- [Lesson 13: 状態遷移とフラグ](#lesson-13-状態遷移とフラグ)
+- [Lesson 14: ノンブロッキング処理（`millis()` の活用）](#lesson-14-ノンブロッキング処理millis-の活用)
+- [Lesson 15: ノンブロッキング処理と状態遷移を用いた実践プログラミング](#lesson-15-ノンブロッキング処理と状態遷移を用いた実践プログラミング)
+- [Lesson 16: 関連するデータをまとめる「構造体（struct）」](#lesson-16-関連するデータをまとめる構造体struct)
+- [Lesson 17: クラス（Class）とオブジェクト指向の基礎](#lesson-17-クラスclassとオブジェクト指向の基礎)
+
+---
+
 ## Lesson 01: LEDを点灯させる
 
 ### このレッスンの目標
@@ -656,23 +678,25 @@ void loop() {
 ```
 このようにして、`analogRead()` で得られた数値に特定の計算をすることで、ピンにかかっている実際の電圧（V）を求めることができます。
 
-### 06-4. サンプルコード（未完成）
+### 06-4. サンプルコードの確認（example_code_6.ino）
 
-`example_code_6.ino` の最新版は以下の通りです。
+`example_code_6.ino` を確認してみましょう。このコードは値は取得できますが、距離への換算やシリアル出力処理などは未記入です。
 
 ```cpp
-#define D3 analog_Pin
-#define D9 PWM_Pin
+#define analog_Pin D3
+#define PWM_Pin D9
 
 void setup(){
-    pinMode(analogPin,INPUT);
-    pinMode(PWMPin,INPUT);
+    pinMode(analog_Pin,INPUT);
+    pinMode(PWM_Pin,INPUT);
 }
 
 void loop(){
     long PWM_duration = pulseIn(PWM_Pin,HIGH);
     int analogValue = analogRead(analog_Pin);
-    // ...計算・表示処理は未記入...
+    
+    // この下から演習課題で実装をしてください。
+    // （取得したPWMやアナログの値を計算して距離に変換し、シリアルモニタに出力する処理）
 }
 ```
 
@@ -793,11 +817,11 @@ void loop(){
 
             SonicData[1] = Serial1.read();
         }
-        while(!Serial1.available());//上一桁以外のデータを破棄
+        while(!Serial1.available());//上位桁以外のデータを破棄
         SonicData[2] = Serial1.read();
         while(!Serial1.available());
         SonicData[3] = Serial1.read();
-        while(!Serail1.available());
+        while(!Serial1.available());
         SonicData[4] = Serial1.read();
 
     }
@@ -837,7 +861,7 @@ C++言語の仕様として、シングルクォーテーションで囲まれ�
 
 ---
 
-## Lesson 08: I2C通信とビット演算（SDT31センサ）
+## Lesson 08: I2C通信とビット演算（SHT31センサ）
 
 ### このレッスンの目標
 - I2C通信の仕組みを理解する
