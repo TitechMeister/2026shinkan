@@ -2,8 +2,8 @@
 #define PWM_Pin D9
 
 void setup(){
-    pinMode(analogPin,INPUT);
-    pinMode(PWMPin,INPUT);
+    pinMode(analog_Pin,INPUT);
+    pinMode(PWM_Pin,INPUT);
 }
 
 void loop(){

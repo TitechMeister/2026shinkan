@@ -1,9 +1,9 @@
-#define D3 analogPin
+#define analogPin D3
 
 uint8_t led[3] = {D0,D1,D2};
 unsigned long previousTime = 0;
 unsigned long currentTime = 0;
-long sum = 0;
+unsigned long sum = 0;
 uint8_t samplecount = 0;
 
 enum class Status {
@@ -11,8 +11,6 @@ enum class Status {
     LED2ON,
     LED3ON
 };
-
-bool previousButtonState = HIGH;
 
 Status LEDstate = Status::LED1ON;
 
@@ -31,25 +29,27 @@ void loop(){
 
     switch(LEDstate){
 
-        case LED1ON:
+        case Status::LED1ON:
             digitalWrite(led[0],HIGH);
-            if(currentTime - previousTime > 3000){  //ボタンが指から離れた瞬間を捉える
+            if(currentTime - previousTime > 3000){  
                 previousTime = millis();
                 LEDstate = Status::LED2ON;
             }
             break;
 
-        case LED2ON:
+        case Status::LED2ON:
             digitalWrite(led[1],HIGH);
-            if(currentTime - previousTime > 3000){  //ボタンが指から離れた瞬間を捉える
+            if(currentTime - previousTime > 3000){  
                 previousTime = millis();
                 LEDstate = Status::LED3ON;
             }
             break;
 
-        case LED3ON:
-            digitalWrite(led[0],HIGH);
-            if(currentTime - previousTime > 3000){  //ボタンが指から離れた瞬間を捉える
+        case Status::LED3ON:
+            digitalWrite(led[2],HIGH);
+            digitalWrite(led[0],LOW);
+            digitalWrite(led[1],LOW);
+            if(currentTime - previousTime > 3000){  
                 previousTime = millis();
                 LEDstate = Status::LED1ON;
             }
@@ -57,12 +57,13 @@ void loop(){
             
     }
 
-    sum = analogRead(analogPin);
+    sum += analogRead(analogPin);
     samplecount ++;
 
     if(samplecount > 20){
         float cm = ((float)sum / samplecount) * 1.27;
         samplecount = 0;
+        sum = 0;
         Serial.print("Distance :");
         Serial.print(cm);
         Serial.println("cm");

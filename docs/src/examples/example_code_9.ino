@@ -17,14 +17,14 @@ void loop() {
 
   for (uint8_t i = 0; i < 10; i++) {
     
-    Wire.beginTransmission(SHT3X_ADDR);
+    Wire.beginTransmission(SHT31_ADDR);
     Wire.write(0x24); 
     Wire.write(0x00); 
     Wire.endTransmission();
 
     delay(20); 
 
-    Wire.requestFrom(SHT3X_ADDR, (uint8_t)6);
+    Wire.requestFrom(SHT31_ADDR, (uint8_t)6);
 
     if (Wire.available() == 6) {
       uint8_t rxData[6];

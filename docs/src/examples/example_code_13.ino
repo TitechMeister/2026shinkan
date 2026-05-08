@@ -1,7 +1,7 @@
 #define ButtonPin D9
 
 uint8_t led[3] = {D0,D1,D2};
-unsigned float previousTime = 0;
+unsigned long previousTime = 0;
 
 enum class Status {
     LED1ON,
@@ -27,22 +27,28 @@ void loop(){
 
     switch(LEDstate){
 
-        case LED1ON:
+        case Status::LED1ON:
             digitalWrite(led[0],HIGH);
+            digitalWrite(led[1],LOW);
+            digitalWrite(led[2],LOW);
             if(previousButtonState == LOW && digitalRead(ButtonPin) == HIGH){  //ボタンが指から離れた瞬間を捉える
                 LEDstate = Status::LED2ON;
             }
             break;
 
-        case LED2ON:
+        case Status::LED2ON:
             digitalWrite(led[1],HIGH);
+            digitalWrite(led[0],LOW);
+            digitalWrite(led[2],LOW);
             if(previousButtonState == LOW && digitalRead(ButtonPin) == HIGH){
                 LEDstate = Status::LED3ON;
             }
             break;
 
-        case LED3ON:
-            digitalWrite(led[0],HIGH);
+        case Status::LED3ON:
+            digitalWrite(led[2],HIGH);
+            digitalWrite(led[0],LOW);
+            digitalWrite(led[1],LOW);
             if(previousButtonState == LOW && digitalRead(ButtonPin) == HIGH){
                 LEDstate = Status::LED1ON;
             }
@@ -50,6 +56,6 @@ void loop(){
             
     }
 
-    previousButtonState = digitalread(ButtonPin);  //この時点でのボタンの状態を保存
+    previousButtonState = digitalRead(ButtonPin);  //この時点でのボタンの状態を保存
     
 }

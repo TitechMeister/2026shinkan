@@ -11,15 +11,14 @@ void setup(){
 void loop(){
     if(digitalRead(button) == LOW){
         for(uint8_t i = 0; i < 3; i++){
-        digitalWrite(led[i],HIGH);
-        delay(500);
-        digitalWrite(led[i],LOW);
-        delay(500);
-        
-    }
+            digitalWrite(led[i],HIGH);
+            delay(500);
+            digitalWrite(led[i],LOW);
+            delay(500);
+        }
     }else{
         for(uint8_t i = 0; i < 3; i++){
-        digitalWrite(led[i],LOW);
-    }
+            digitalWrite(led[i],LOW);
+        }
     }
 }

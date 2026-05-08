@@ -32,5 +32,7 @@ void loop(){
     
     if(digitalRead(ButtonPin) == LOW){
         digitalWrite(LED2,HIGH);
+    }else{
+        digitalWrite(LED2,LOW);
     }
 }

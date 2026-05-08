@@ -1,6 +1,6 @@
 #include <Wire.h>
 
-const uint8_t SDT31_ADDR = 0x45;
+const uint8_t SHT31_ADDR = 0x45;
 
 void setup(){
     Serial.begin(9600);
@@ -9,14 +9,14 @@ void setup(){
 }
 
 void loop(){
-    Wire.beginTransmission(SDT31_ADDR);
+    Wire.beginTransmission(SHT31_ADDR);
     Wire.write(0x24);
     Wire.write(0x00);
     Wire.endTransmission();
 
     delay(20);
 
-    Wire.requestFrom(SDT31_ADDR,6);
+    Wire.requestFrom(SHT31_ADDR,6);
 
     if(Wire.available() == 6){
         uint8_t Data[6];

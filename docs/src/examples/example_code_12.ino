@@ -1,6 +1,8 @@
 #define button D9
 const uint8_t led[3] = {D0,D1,D2};
-volatile uint8_t Button_State = 0
+volatile uint8_t Button_State = 0;
+
+void LED_onoff(uint8_t LEDPin, unsigned long delayTime);
 
 void setup(){
     for(uint8_t i = 0; i < 3; i ++){
@@ -30,7 +32,7 @@ void loop(){
         
         case 2:
             for(uint8_t i = 0; i < 3; i ++){
-                LED_onoff(led[i];500);
+                LED_onoff(led[i], 500);
             }
             break;
 
