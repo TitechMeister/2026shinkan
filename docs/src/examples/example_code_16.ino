@@ -1,5 +1,5 @@
 #define analog_Pin D3
-#define PWM_Pin D9
+#define PWM_Pin D8
 
 struct SensorData {
     unsigned long add;

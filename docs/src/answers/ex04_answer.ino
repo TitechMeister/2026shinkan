@@ -1,4 +1,6 @@
-﻿#define button D9
+﻿// 考え方: ボタンが押されたらcountを1増やします。押しっぱなしで何度も数えないよう、while文でボタンが離されるまで待ちます。
+
+#define button D9
 
 // 必要なグローバル変数は「カウント」だけ
 uint8_t count = 0;
@@ -24,3 +26,4 @@ void loop() {
     digitalWrite(D0, HIGH);
   }
 }
+

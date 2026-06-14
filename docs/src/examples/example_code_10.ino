@@ -3,7 +3,7 @@
 
 const uint8_t SHT31_ADDR = 0x45;
 
-Adafruit_SHT31 sht31 = Adafruit_SHT31();
+Adafruit_SHT31 sht31;
 
 void setup() {
   Serial.begin(9600);
