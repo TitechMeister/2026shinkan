@@ -1,4 +1,4 @@
-﻿// 考え方: 温度、湿度、距離の合計と回数をstructにまとめます。20msごとに1回ずつ足し込み、10回たまったら平均を表示します。
+// 考え方: 温度、湿度、距離の合計と回数をstructにまとめます。200msごとに1回ずつ足し込み、10回たまったら平均を表示します。
 
 #include <Wire.h>
 #include <Adafruit_SHT31.h>
@@ -19,11 +19,6 @@ SensorData distanceData = {0.0, 0};
 unsigned long previousShtTime = 0;
 unsigned long previousDistanceTime = 0;
 
-void addSample(SensorData &data, float value);
-void printAverage(const char *label, SensorData &data, const char *unit);
-void updateSht31();
-void updateDistance();
-
 void setup() {
   Serial.begin(9600);
   Serial1.begin(9600);
@@ -32,76 +27,76 @@ void setup() {
 }
 
 void loop() {
-  updateSht31();
-  updateDistance();
-}
-
-void addSample(SensorData &data, float value) {
-  data.sum += value;
-  data.count++;
-}
-
-void printAverage(const char *label, SensorData &data, const char *unit) {
-  if (data.count >= 10) {
-    float average = data.sum / data.count;
-
-    Serial.print(label);
-    Serial.print(": ");
-    Serial.print(average);
-    Serial.println(unit);
-
-    data.sum = 0.0;
-    data.count = 0;
-  }
-}
-
-void updateSht31() {
   unsigned long currentTime = millis();
 
-  if (currentTime - previousShtTime < 20) {
-    return;
+  if (currentTime - previousShtTime >= 200) {
+    previousShtTime = currentTime;
+
+    float temperature = sht31.readTemperature();
+    float humidity = sht31.readHumidity();
+
+    temperatureData.sum += temperature;
+    temperatureData.count++;
+
+    humidityData.sum += humidity;
+    humidityData.count++;
+
+    if (temperatureData.count >= 10) {
+      float averageTemperature = temperatureData.sum / temperatureData.count;
+
+      Serial.print("Temperature: ");
+      Serial.print(averageTemperature);
+      Serial.println(" C");
+
+      temperatureData.sum = 0.0;
+      temperatureData.count = 0;
+    }
+
+    if (humidityData.count >= 10) {
+      float averageHumidity = humidityData.sum / humidityData.count;
+
+      Serial.print("Humidity: ");
+      Serial.print(averageHumidity);
+      Serial.println(" %");
+
+      humidityData.sum = 0.0;
+      humidityData.count = 0;
+    }
   }
 
-  previousShtTime = currentTime;
+  if (currentTime - previousDistanceTime >= 200) {
+    previousDistanceTime = currentTime;
 
-  float temperature = sht31.readTemperature();
-  float humidity = sht31.readHumidity();
+    int SonicData[5] = {0, 0, 0, 0, 0};
 
-  addSample(temperatureData, temperature);
-  addSample(humidityData, humidity);
+    if (Serial1.available() >= 5) {
+      SonicData[0] = Serial1.read();
 
-  printAverage("Temperature", temperatureData, " C");
-  printAverage("Humidity", humidityData, " %");
-}
+      if (SonicData[0] == 'R') {
+        for (uint8_t i = 1; i < 5; i++) {
+          SonicData[i] = Serial1.read();
+        }
 
-void updateDistance() {
-  unsigned long currentTime = millis();
+        int inches = (SonicData[1] - '0') * 100;
+        inches += (SonicData[2] - '0') * 10;
+        inches += SonicData[3] - '0';
 
-  if (currentTime - previousDistanceTime < 20) {
-    return;
-  }
+        float cm = (float)inches * 2.54;
 
-  previousDistanceTime = currentTime;
+        distanceData.sum += cm;
+        distanceData.count++;
 
-  int SonicData[5] = {0, 0, 0, 0, 0};
+        if (distanceData.count >= 10) {
+          float averageDistance = distanceData.sum / distanceData.count;
 
-  if (Serial1.available() >= 5) {
-    SonicData[0] = Serial1.read();
+          Serial.print("Distance: ");
+          Serial.print(averageDistance);
+          Serial.println(" cm");
 
-    if (SonicData[0] == 'R') {
-      for (uint8_t i = 1; i < 5; i++) {
-        SonicData[i] = Serial1.read();
+          distanceData.sum = 0.0;
+          distanceData.count = 0;
+        }
       }
-
-      int inches = (SonicData[1] - '0') * 100;
-      inches += (SonicData[2] - '0') * 10;
-      inches += SonicData[3] - '0';
-
-      float cm = (float)inches * 2.54;
-
-      addSample(distanceData, cm);
-      printAverage("Distance", distanceData, " cm");
     }
   }
 }
-
